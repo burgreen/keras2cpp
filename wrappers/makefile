@@ -4,7 +4,7 @@
 # include what to build
 #----------------------------
 
-include make-0-c
+include make-0-f90
 
 #--------------------------- 
 # rules section

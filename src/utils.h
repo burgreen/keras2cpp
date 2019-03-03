@@ -39,11 +39,11 @@ namespace keras2cpp {
     auto timeit(Callable&& callable, Args&&... args) {
         using namespace std::chrono;
         auto begin = high_resolution_clock::now();
-        if constexpr (std::is_void_v<std::invoke_result_t<Callable, Args...>>)
-            return std::make_tuple(
-                (std::invoke(callable, args...), nullptr),
-                duration<double>(high_resolution_clock::now() - begin).count());
-        else
+        //if constexpr (std::is_void_v<std::invoke_result_t<Callable, Args...>>)
+        //    return std::make_tuple(
+        //        (std::invoke(callable, args...), nullptr),
+        //        duration<double>(high_resolution_clock::now() - begin).count());
+        //else
             return std::make_tuple(
                 std::invoke(callable, args...),
                 duration<double>(high_resolution_clock::now() - begin).count());

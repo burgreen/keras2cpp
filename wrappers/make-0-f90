@@ -13,7 +13,7 @@ include make-compiler-clang
 # define the main target (keep ext consistent)
 #--------------------------------------------
 
-MAIN_C     = 1-test-f90.f90
+MAIN_F90   = 1-test-f90.f90
 MAIN_OBJ   = 1-test-f90.$(OBJ)
 
 LINK       = $(LINK_F90)
