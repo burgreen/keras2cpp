@@ -1,0 +1,16 @@
+! keras2cpp_wrapper.h90
+
+! notes:
+! 1. 2019.03.02 initial coding; greg.burgreen@msstate.edu
+
+#ifndef keras2cpp_wrapper_h90
+#define keras2cpp_wrapper_h90
+
+#define c_int      integer
+#define c_bool     integer
+#define c_char     character(len=1)
+#define c_float    real*4
+#define c_double   real*8
+#define c_point    c_float, dimension(3)
+
+#endif

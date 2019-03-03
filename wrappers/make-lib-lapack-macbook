@@ -1,0 +1,22 @@
+# make-lib-lapack-macbook
+
+#---------------------------------------------------
+# machine-specific compiler overrides
+#---------------------------------------------------
+
+#FLAGS_C += -MD
+
+#FLAGS_LINK_F90 += -libs:static
+
+#---------------------------------------------------
+# machine-specific libs to be linked
+#---------------------------------------------------
+
+DIR_BASE = /Users/burgreen
+
+LIB_LAPACK = $(DIR_BASE)/dev/lapack/3.2.1/cmake-mac-clang9
+
+LIBS += $(LIB_LAPACK)/BLAS/SRC/libblas.a 
+LIBS += $(LIB_LAPACK)/SRC/liblapack.a 
+LIBS += $(LIB_LAPACK)/F2CLIBS/libf2c/libf2c.a 
+

@@ -1,0 +1,70 @@
+# make-spec-i64 (windows intel 64-bit)
+
+#----------------------------
+# global section
+#----------------------------
+
+OBJ = obj
+
+.SUFFIXES: .$(OBJ) .f90 .c .cpp
+
+#----------------------------
+# compiler section
+#----------------------------
+
+C   = icl
+CPP = icl
+F90 = ifort
+
+FLAGS_F90  = 
+FLAGS_F90 += -MD
+FLAGS_F90 += -fpp
+FLAGS_F90 += -O3
+FLAGS_F90 += -real-size:64
+FLAGS_F90 += -Dreal_t=REAL\(kind\(0.d0\)\)
+FLAGS_F90 += -Dcomplex_t=COMPLEX\(kind\(0.d0\)\)
+FLAGS_F90 += -DCOMPILER_INTEL_F
+FLAGS_F90 += -DCOMPILER_INTEL_C
+
+FLAGS_C  = 
+FLAGS_C += -MD
+FLAGS_C += -nologo
+FLAGS_C += -EHsc
+FLAGS_C += -DNOMINMAX
+FLAGS_C += -DO_OS_WIN
+FLAGS_C += -DO_OS_WIN64
+FLAGS_C += -DCPP_INTEL
+FLAGS_C += -DO_CPP_INTEL
+FLAGS_C += -DCOMPILER_INTEL_C
+FLAGS_C += -DCOMPILER_INTEL_F
+
+FLAGS_CPP  = $(FLAGS_C)
+FLAGS_CPP += -TP
+
+PATH_C_CPP = -I. 
+PATH_F90 = -I.
+
+OUT_EXE = -o
+OUT_OBJ = -o
+OUT_OBJ_C_CPP = -Fo
+
+#----------------------------
+# link section
+#----------------------------
+
+LINK_C   = xilink
+LINK_CPP = xilink
+LINK_F90 = ifort
+
+FLAGS_LINK_F90 = 
+#FLAGS_LINK_F90 += -nologo
+#FLAGS_LINK_F90 += -NODEFAULTLIB:LIBCMT
+
+FLAGS_LINK_C  = 
+FLAGS_LINK_C += -nologo
+FLAGS_LINK_C += -NODEFAULTLIB:LIBCMT
+
+LIBPATH = 
+LIBS    = 
+
+MAKEDEPEND = make-depend-perl --depend=mod --silent --longpath 

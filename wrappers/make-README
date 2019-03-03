@@ -1,0 +1,20 @@
+# make-README
+
+To use this makefile on your system:
+
+1. Modify/create make-compiler-xxx to reflect your compiler environment.
+
+2. Modify/create make-0-xxx to reflect what you want to compile
+
+3. Modify makefile to include make-0-xxx of step 2.
+
+4. <Optional> To create dependencies (do this after you have moved or added files):  
+   make depend 
+   - This requires some form of /bin/perl. See top line of file make-depend-perl.
+   - Outputs dependencies to file make-depend-output.
+
+5. To compile your code:
+   make 
+
+6. To clean up the directory: 
+   make clean 

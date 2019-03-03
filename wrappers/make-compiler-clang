@@ -1,0 +1,68 @@
+# make-compiler-clang
+
+#----------------------------
+# global section
+#----------------------------
+
+OBJ = o
+
+#.SUFFIXES: .$(OBJ) .f90 .c .cpp .cc
+
+#----------------------------
+# compiler c/c++ section
+#----------------------------
+
+C   = gcc
+CPP = g++
+
+FLAGS_C  = 
+#FLAGS_C += -DCPP_GNU
+#FLAGS_C += -DO_CPP_GNU
+FLAGS_C += -DCOMPILER_GNU_C
+FLAGS_C += -DCOMPILER_GNU_F
+FLAGS_C += -DCOMPILER_F_UNDERSCORE
+
+FLAGS_CPP  = $(FLAGS_C)
+FLAGS_CPP += -std=c++17
+
+PATH_C_CPP = -I. 
+
+OUT_EXE = -o
+OUT_OBJ = -o
+OUT_OBJ_C_CPP = -o
+
+#----------------------------
+# compiler f90 section
+#----------------------------
+
+F90 = gfortran
+
+FLAGS_F90  = 
+FLAGS_F90 += -cpp
+#FLAGS_F90 += -O3
+#FLAGS_F90 += -fdefault-real-8
+#FLAGS_F90 += -fdefault-double-8
+#FLAGS_F90 += -Dreal_t=REAL\(kind\(0.d0\)\)
+#FLAGS_F90 += -Dcomplex_t=COMPLEX\(kind\(0.d0\)\)
+FLAGS_F90 += -DCOMPILER_GNU_F
+FLAGS_F90 += -DCOMPILER_GNU_C
+
+PATH_F90 = -I.
+
+#----------------------------
+# link section
+#----------------------------
+
+LINK_C   = gcc
+LINK_CPP = g++
+LINK_F90 = gfortran
+
+FLAGS_LINK_F90 = 
+FLAGS_LINK_F90 += -lc++
+
+FLAGS_LINK_C  = 
+
+LIBPATH = 
+LIBS    = 
+
+MAKEDEPEND = make-depend-perl --depend=mod --silent --longpath 

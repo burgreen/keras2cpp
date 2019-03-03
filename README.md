@@ -118,6 +118,26 @@ $ ./keras2cpp
 [ -1.857357 ]
 ```
 
+# How to build c and fortran wrappers
+
+*Tested on OSX with Python 3.6, clang-9.1, gfortran-6.3*
+
+Perform the above steps in `How to build and run`
+
+```
+$ git checkout wrappers
+$ cd wrappers
+```
+
+To create c wrapper, edit `makefile` to include `make-0-c`.
+To create f90 wrapper, edit `makefile` to include `make-0-f90`.
+See `make-README` for more information.
+
+```
+$ make
+$ ./a
+```
+
 # License
 
 MIT

@@ -1,0 +1,61 @@
+# make-spec-gnu
+
+#----------------------------
+# global section
+#----------------------------
+
+OBJ = o
+
+.SUFFIXES: .$(OBJ) .f90 .c .cpp
+
+#----------------------------
+# compiler section
+#----------------------------
+
+C   = gcc
+CPP = g++
+F90 = gfortran
+
+FLAGS_F90  = 
+FLAGS_F90 += -cpp
+FLAGS_F90 += -O3
+FLAGS_F90 += -fdefault-real-8
+FLAGS_F90 += -fdefault-double-8
+FLAGS_F90 += -Dreal_t=REAL\(kind\(0.d0\)\)
+FLAGS_F90 += -Dcomplex_t=COMPLEX\(kind\(0.d0\)\)
+FLAGS_F90 += -DCOMPILER_GNU_F
+FLAGS_F90 += -DCOMPILER_GNU_C
+
+FLAGS_C  = 
+#FLAGS_C += -DCPP_INTEL
+#FLAGS_C += -DO_CPP_INTEL
+FLAGS_C += -DCOMPILER_GNU_C
+FLAGS_C += -DCOMPILER_GNU_F
+
+FLAGS_CPP  = $(FLAGS_C)
+#FLAGS_CPP += -std=c++17
+
+PATH_C_CPP = -I. 
+PATH_F90 = -I.
+
+OUT_EXE = -o
+OUT_OBJ = -o
+OUT_OBJ_C_CPP = -o
+
+#----------------------------
+# link section
+#----------------------------
+
+LINK_C   = gcc
+LINK_CPP = g++
+LINK_F90 = gfortran
+
+FLAGS_LINK_F90 = 
+FLAGS_LINK_F90 += -lstdc++
+
+FLAGS_LINK_C  = 
+
+LIBPATH = 
+LIBS    = 
+
+MAKEDEPEND = make-depend-perl --depend=mod --silent --longpath 

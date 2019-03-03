@@ -1,0 +1,84 @@
+# make-0-c
+
+#--------------------------------------------
+# define base compiler and any overrides
+#--------------------------------------------
+
+include make-compiler-clang
+
+#C = g++
+#LINK_C = g++
+
+#--------------------------------------------
+# define the main target (keep ext consistent)
+#--------------------------------------------
+
+MAIN_C     = 1-test-f90.f90
+MAIN_OBJ   = 1-test-f90.$(OBJ)
+
+LINK       = $(LINK_F90)
+FLAGS_LINK = $(FLAGS_LINK_F90)
+FLAGS_C   += -DMAIN_IS_F90
+FLAGS_CPP += -DMAIN_IS_F90
+
+EXE = a
+
+#--------------------------------------------
+# define any supporting libs
+#--------------------------------------------
+
+#include make-lib-optimal-macbook
+
+#--------------------------------------------
+# define exts and lists of local supporting files 
+#--------------------------------------------
+
+.SUFFIXES: .$(OBJ) .f90 .c .cpp .cc
+
+DIR_K2C = ..
+
+FILES_F90  = 
+
+FILES_C = 
+
+FILES_CPP = 
+FILES_CPP += ./keras2cpp_wrapper.cpp
+
+FILES_CC = 
+FILES_CC += $(DIR_K2C)/src/layers/elu.cc
+FILES_CC += $(DIR_K2C)/src/layers/lstm.cc
+FILES_CC += $(DIR_K2C)/src/layers/locally1d.cc
+FILES_CC += $(DIR_K2C)/src/layers/locally2d.cc
+FILES_CC += $(DIR_K2C)/src/layers/activation.cc
+FILES_CC += $(DIR_K2C)/src/layers/conv2d.cc
+FILES_CC += $(DIR_K2C)/src/layers/maxPooling2d.cc
+FILES_CC += $(DIR_K2C)/src/layers/conv1d.cc
+FILES_CC += $(DIR_K2C)/src/layers/dense.cc
+FILES_CC += $(DIR_K2C)/src/layers/batchNormalization.cc
+FILES_CC += $(DIR_K2C)/src/layers/embedding.cc
+FILES_CC += $(DIR_K2C)/src/layers/flatten.cc
+FILES_CC += $(DIR_K2C)/src/utils.cc
+FILES_CC += $(DIR_K2C)/src/tensor.cc
+FILES_CC += $(DIR_K2C)/src/model.cc
+FILES_CC += $(DIR_K2C)/src/baseLayer.cc
+
+#--------------------------------------------
+# define include paths
+#--------------------------------------------
+
+PATH_F90 += -I$(DIR_K2C)/src/sft_core/fortran
+
+PATH_C_CPP += -I$(DIR_K2C)/include
+PATH_C_CPP += -I$(DIR_K2C)/src
+PATH_C_CPP += -I$(DIR_K2C)/src/wrapper
+
+#--------------------------------------------
+# define list of object files based on exts
+#--------------------------------------------
+# don't mix exts, or 'make clean' will bite you!
+
+FILES_OBJ  = 
+FILES_OBJ += $(FILES_F90:.f90=.$(OBJ))
+FILES_OBJ += $(FILES_C:.c=.$(OBJ))
+FILES_OBJ += $(FILES_CPP:.cpp=.$(OBJ))
+FILES_OBJ += $(FILES_CC:.cc=.$(OBJ))
