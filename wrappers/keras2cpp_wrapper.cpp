@@ -17,24 +17,6 @@ using keras2cpp::Stream;
 
 static Model* p_model = nullptr;
 
-  static int
-//------------------------------------------
-  s_handle( Model* m )
-//------------------------------------------
-{
-  return 1;
-}
-
-  static Model*
-//------------------------------------------
-  s_pointer( int handle )
-//------------------------------------------
-{
-  if( handle != 1 ) { printf("bad handle\n"); exit(1); }
-
-  return p_model;
-}
-
 #if defined MAIN_IS_F90
 extern "C" {
 #endif 
