@@ -11,10 +11,6 @@
   program main
 !------------------------------------------
 
-  !point_t :: pt
-  !int_t :: ec
-  !real_t, dimension(3,5) :: pts
-
   character*(80) :: argv
   character*(80) :: filename
   c_int model; 
