@@ -14,17 +14,6 @@ OBJ = obj
 
 C   = icl
 CPP = icl
-F90 = ifort
-
-FLAGS_F90  = 
-FLAGS_F90 += -MD
-FLAGS_F90 += -fpp
-FLAGS_F90 += -O3
-FLAGS_F90 += -real-size:64
-FLAGS_F90 += -Dreal_t=REAL\(kind\(0.d0\)\)
-FLAGS_F90 += -Dcomplex_t=COMPLEX\(kind\(0.d0\)\)
-FLAGS_F90 += -DCOMPILER_INTEL_F
-FLAGS_F90 += -DCOMPILER_INTEL_C
 
 FLAGS_C  = 
 FLAGS_C += -MD
@@ -37,16 +26,34 @@ FLAGS_C += -DCPP_INTEL
 FLAGS_C += -DO_CPP_INTEL
 FLAGS_C += -DCOMPILER_INTEL_C
 FLAGS_C += -DCOMPILER_INTEL_F
+FLAGS_C += -DCOMPILER_F_CAPITALS
 
 FLAGS_CPP  = $(FLAGS_C)
 FLAGS_CPP += -TP
 
 PATH_C_CPP = -I. 
-PATH_F90 = -I.
 
 OUT_EXE = -o
 OUT_OBJ = -o
 OUT_OBJ_C_CPP = -Fo
+
+#----------------------------
+# compiler f90 section
+#----------------------------
+
+F90 = ifort
+
+FLAGS_F90  = 
+FLAGS_F90 += -MD
+FLAGS_F90 += -fpp
+FLAGS_F90 += -O3
+FLAGS_F90 += -real-size:64
+FLAGS_F90 += -Dreal_t=REAL\(kind\(0.d0\)\)
+FLAGS_F90 += -Dcomplex_t=COMPLEX\(kind\(0.d0\)\)
+FLAGS_F90 += -DCOMPILER_INTEL_F
+FLAGS_F90 += -DCOMPILER_INTEL_C
+
+PATH_F90 = -I.
 
 #----------------------------
 # link section

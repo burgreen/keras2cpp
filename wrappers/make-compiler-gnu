@@ -14,6 +14,20 @@ OBJ = o
 
 C   = gcc
 CPP = g++
+
+FLAGS_CPP  = $(FLAGS_C)
+#FLAGS_CPP += -std=c++17
+
+PATH_C_CPP = -I. 
+
+OUT_EXE = -o
+OUT_OBJ = -o
+OUT_OBJ_C_CPP = -o
+
+#----------------------------
+# compiler f90 section
+#----------------------------
+
 F90 = gfortran
 
 FLAGS_F90  = 
@@ -31,16 +45,9 @@ FLAGS_C  =
 #FLAGS_C += -DO_CPP_INTEL
 FLAGS_C += -DCOMPILER_GNU_C
 FLAGS_C += -DCOMPILER_GNU_F
+FLAGS_C += -DCOMPILER_F_UNDERSCORE
 
-FLAGS_CPP  = $(FLAGS_C)
-#FLAGS_CPP += -std=c++17
-
-PATH_C_CPP = -I. 
 PATH_F90 = -I.
-
-OUT_EXE = -o
-OUT_OBJ = -o
-OUT_OBJ_C_CPP = -o
 
 #----------------------------
 # link section
