@@ -124,6 +124,13 @@ $ ./keras2cpp
 
 Perform the above steps in `How to build and run`
 
+Add this to the end of any other Keras model:
+```
+#save model
+from keras2cpp import export_model
+export_model(model, 'example.model')
+```
+
 ```
 $ git checkout wrappers
 $ cd wrappers
