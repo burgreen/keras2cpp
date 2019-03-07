@@ -49,7 +49,6 @@
 
   do i=1,n_in
     in(i) = (in(i)-mean(i))/scale(i)
-    !in(i) = 0.0
     print*, "in", i, in(i)
   enddo
 
