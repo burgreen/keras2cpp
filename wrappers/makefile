@@ -4,7 +4,7 @@
 # include what to build
 #----------------------------
 
-include make-1-cpp
+include make-3-cpp
 
 #--------------------------- 
 # rules section
