@@ -66,7 +66,7 @@ FILES_CC += $(DIR_K2C)/src/baseLayer.cc
 # define include paths
 #--------------------------------------------
 
-PATH_F90 += -I$(DIR_K2C)/src/sft_core/fortran
+#PATH_F90 += -I$(DIR_K2C)/src/sft_core/fortran
 
 PATH_C_CPP += -I$(DIR_K2C)/include
 PATH_C_CPP += -I$(DIR_K2C)/src
