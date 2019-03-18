@@ -81,5 +81,5 @@ extern "C" {
 #endif
 
 #if defined MAIN_IS_F90
-}
+} // extern "C" 
 #endif 
