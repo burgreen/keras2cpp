@@ -1,6 +1,7 @@
 // 2-turbulence-cpp.cpp
 
 #include <iostream>
+#include <cmath>
 
 #include "keras2cpp_wrapper.h"
 
@@ -10,12 +11,12 @@ int main( int argc, char** argv )
 {
   int model = keras2cpp_model_create();
 
-  int rc = keras2cpp_model_load( model, "turbulence2.model" );
+  int rc = keras2cpp_model_load( model, "turbulence-log.model" );
 
   int n_in = 3;
   int n_out = 4;
-  float mean[]  = { 5.41805403e+04, 5.39642143e+00, 4.51179963e-03 };
-  float scale[] = { 5.03700975e+04, 1.90951479e+01, 2.61080447e-03  };
+  float mean[]  = { 4.48331753,-0.2465536, -2.53451854};
+  float scale[] = {0.51062794,1.26746158,1.11060776};
   float in[3];
   float out[4];
 
@@ -25,6 +26,8 @@ int main( int argc, char** argv )
 
   for( int i=0; i < n_in; i++ )
   {
+    if( in[i] < 1.e-20 ) in[i] = 1.e-20;
+    in[i] = std::log10( in[i] );
     in[i] = (in[i] - mean[i]) / scale[i];
     cout << "in[" << i << "] = " << in[i] << endl;
   }
@@ -33,6 +36,7 @@ int main( int argc, char** argv )
 
   for( int i=0; i < n_out; i++ )
   {
+    out[i] = std::pow( 10., out[i] );
     cout << "out[" << i << "] = " << out[i] << endl;
   }
   cout << "evaluated by cpp" << endl;
