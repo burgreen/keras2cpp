@@ -36,29 +36,40 @@
   n_in = 3
   n_out = 4
 
-  ! this need to be read in from file
-  mean(1) =  4.48331753
-  mean(2) = -0.2465536
-  mean(3) = -2.53451854
-  scale(1) = 0.51062794
-  scale(2) = 1.26746158
-  scale(3) = 1.11060776
+!  ! this need to be read in from file
+!  mean(1) =  4.48331753
+!  mean(2) = -0.2465536
+!  mean(3) = -2.53451854
+!  scale(1) = 0.51062794
+!  scale(2) = 1.26746158
+!  scale(3) = 1.11060776
+!
+!  in(1) = 500
+!  in(2) = 1
+!  in(3) = 0
+!
+!  do i=1,n_in
+!    if( in(i) .lt. 1e-20 ) in(i) = 1e-20
+!    in(i) = LOG10( in(i) )
+!    in(i) = (in(i)-mean(i))/scale(i)
+!    print*, "in", i, in(i)
+!  enddo
+!
+!  call c_keras2cpp_model_evaluate( model, n_in, in, n_out, out, rc )
+!
+!  do i=1,n_out
+!    out(i) = 10.0 ** out(i)
+!    print*, "out", i, out(i)
+!  enddo
 
   in(1) = 500
   in(2) = 1
   in(3) = 0
-
   do i=1,n_in
-    if( in(i) .lt. 1e-20 ) in(i) = 1e-20
-    in(i) = LOG10( in(i) )
-    in(i) = (in(i)-mean(i))/scale(i)
     print*, "in", i, in(i)
   enddo
-
-  call c_keras2cpp_model_evaluate( model, n_in, in, n_out, out, rc )
-
+  call c_keras2cpp_model_evaluate_data_v4( model, n_in, in, n_out, out, rc )
   do i=1,n_out
-    out(i) = 10.0 ** out(i)
     print*, "out", i, out(i)
   enddo
 

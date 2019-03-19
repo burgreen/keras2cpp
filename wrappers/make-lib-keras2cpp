@@ -1,0 +1,20 @@
+# make-lib-lapack-macbook
+
+#---------------------------------------------------
+# machine-specific compiler overrides
+#---------------------------------------------------
+
+#C_FLAGS += -MD
+
+#EXE_LINK_FLAGS += -libs:static
+
+#---------------------------------------------------
+# machine-specific libs to be linked
+#---------------------------------------------------
+
+DIR_BASE = .
+
+LIB_KERAS2CPP = $(DIR_BASE)
+
+LIBS += $(LIB_KERAS2CPP)/libkeras2cpp.a 
+

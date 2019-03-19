@@ -1,0 +1,90 @@
+# make-2-f90-lib
+
+#--------------------------------------------
+# define base compiler and any overrides
+#--------------------------------------------
+
+include make-compiler-clang9
+
+#C_COMPILER = g++
+#EXE_LINK = g++
+
+#--------------------------------------------
+# define the main target (keep ext consistent)
+#--------------------------------------------
+
+#MAIN_F90    = 2-turbulence-f90.f90
+#MAIN_OBJECT = 2-turbulence-f90.$(OBJ)
+MAIN_LIB = keras2cpp
+
+EXE_OUT         = $(F90_OUT)
+EXE_LINK        = $(F90_LINK)
+EXE_LINK_FLAGS += $(F90_LINK_FLAGS)
+C_FLAGS        += -DMAIN_IS_F90
+CPP_FLAGS      += -DMAIN_IS_F90
+
+
+STATIC_LIB = $(STATIC_LIB_PRE)$(MAIN_LIB).$(STATIC_LIB_EXT)
+OUT = $(STATIC_LIB)
+
+#--------------------------------------------
+# define any supporting libs
+#--------------------------------------------
+
+#include make-lib-optimal-macbook
+
+#--------------------------------------------
+# define exts and lists of local supporting files 
+#--------------------------------------------
+
+.SUFFIXES: .$(OBJ) .f90 .h .c .cpp .cc
+
+DIR_K2C = ..
+
+FILES_F90  = 
+
+FILES_C = 
+
+FILES_CPP = 
+FILES_CPP += ./keras2cpp_wrapper.cpp
+
+FILES_CC = 
+FILES_CC += $(DIR_K2C)/src/layers/elu.cc
+FILES_CC += $(DIR_K2C)/src/layers/lstm.cc
+FILES_CC += $(DIR_K2C)/src/layers/locally1d.cc
+FILES_CC += $(DIR_K2C)/src/layers/locally2d.cc
+FILES_CC += $(DIR_K2C)/src/layers/activation.cc
+FILES_CC += $(DIR_K2C)/src/layers/conv2d.cc
+FILES_CC += $(DIR_K2C)/src/layers/maxPooling2d.cc
+FILES_CC += $(DIR_K2C)/src/layers/conv1d.cc
+FILES_CC += $(DIR_K2C)/src/layers/dense.cc
+FILES_CC += $(DIR_K2C)/src/layers/batchNormalization.cc
+FILES_CC += $(DIR_K2C)/src/layers/embedding.cc
+FILES_CC += $(DIR_K2C)/src/layers/flatten.cc
+FILES_CC += $(DIR_K2C)/src/utils.cc
+FILES_CC += $(DIR_K2C)/src/tensor.cc
+FILES_CC += $(DIR_K2C)/src/model.cc
+FILES_CC += $(DIR_K2C)/src/baseLayer.cc
+
+#--------------------------------------------
+# define include paths
+#--------------------------------------------
+
+#F90_PATH += -I$(DIR_K2C)/src/sft_core/fortran
+
+C_PATH += -I$(DIR_K2C)/include
+C_PATH += -I$(DIR_K2C)/src
+C_PATH += -I$(DIR_K2C)/src/wrapper
+
+CPP_PATH = $(C_PATH)
+
+#--------------------------------------------
+# define list of object files based on exts
+#--------------------------------------------
+# don't mix exts, or 'make clean' will bite you!
+
+OBJECTS  = 
+OBJECTS += $(FILES_F90:.f90=.$(OBJ))
+OBJECTS += $(FILES_C:.c=.$(OBJ))
+OBJECTS += $(FILES_CPP:.cpp=.$(OBJ))
+OBJECTS += $(FILES_CC:.cc=.$(OBJ))

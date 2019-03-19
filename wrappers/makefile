@@ -1,37 +1,45 @@
-# makefile
+# makefile-lib
 
 #--------------------------- 
 # include what to build
 #----------------------------
 
-include make-2-f90-lib
+include make-2-f90-exe
 
 #--------------------------- 
 # rules section
 #----------------------------
 
-all:	$(FILES_OBJ) $(MAIN_OBJ)
-	$(LINK) $(FLAGS_LINK) $(OUT_EXE) $(EXE) $(FILES_OBJ) $(MAIN_OBJ) $(LIBS) $(LIBPATH)
+default: $(OUT)
+
+$(EXE):	$(OBJECTS) $(MAIN_OBJECT)
+	$(EXE_LINK) $(EXE_LINK_FLAGS) $(EXE_OUT) $(EXE) $(MAIN_OBJECT) $(OBJECTS) $(LIBS) $(LIBS_PATH)
+
+$(STATIC_LIB): $(OBJECTS)
+	$(STATIC_LIB_LINK) $(STATIC_LIB_LINK_FLAGS) $(STATIC_LIB) $(OBJECTS) 
+
+$(SHARED_LIB): $(OBJECTS)
+	$(SHARED_LIB_LINK) $(SHARED_LIB_LINK_FLAGS) -o $(SHARED_LIB) $(OBJECTS) 
 
 .f90.$(OBJ):
-	$(F90) -c $(FLAGS_F90) $(PATH_F90) $(OUT_OBJ) $*.$(OBJ) $*.f90
+	$(F90_COMPILER) -c $(F90_FLAGS) $(F90_PATH) $(F90_OUT) $*.$(OBJ) $*.f90
 
 .c.$(OBJ):
-	$(C) -c $(FLAGS_C) $(PATH_C_CPP) $(OUT_OBJ_C_CPP)$*.$(OBJ) $*.c
+	$(C_COMPILER) -c $(C_FLAGS) $(C_PATH) $(C_OUT)$*.$(OBJ) $*.c
 
 .cpp.$(OBJ):
-	$(CPP) -c $(FLAGS_CPP) $(PATH_C_CPP) $(OUT_OBJ_C_CPP)$*.$(OBJ) $*.cpp
+	$(CPP_COMPILER) -c $(CPP_FLAGS) $(CPP_PATH) $(CPP_OUT)$*.$(OBJ) $*.cpp
 
 .cc.$(OBJ):
-	$(CPP) -c $(FLAGS_CPP) $(PATH_C_CPP) $(OUT_OBJ_C_CPP)$*.$(OBJ) $*.cc
+	$(CPP_COMPILER) -c $(CPP_FLAGS) $(CPP_PATH) $(CPP_OUT)$*.$(OBJ) $*.cc
 
 clean:
 	-rm *.mod
-	-rm $(FILES_OBJ)
-	-rm $(MAIN_OBJ)
-	-rm a.exe a.out a
+	-rm $(OBJECTS)
+	-rm $(MAIN_OBJECT)
+	-rm $(OUT)
 
 depend:	
-	$(MAKEDEPEND) --file=make-depend-output $(F90PATH) $(FILES_F90) $(MAIN_F90)
+	$(F90_DEPEND) --file=make-depend-output $(F90_PATH) $(FILES_F90) $(MAIN_F90)
 
 include make-depend-output
