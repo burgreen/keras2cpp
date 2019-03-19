@@ -58,7 +58,8 @@ LINK_CPP = g++
 LINK_F90 = gfortran
 
 FLAGS_LINK_F90 = 
-FLAGS_LINK_F90 += -lc++
+#FLAGS_LINK_F90 += -lc++
+FLAGS_LINK_F90 += -lstdc++
 
 FLAGS_LINK_C  = 
 

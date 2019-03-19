@@ -4,7 +4,7 @@
 # define base compiler and any overrides
 #--------------------------------------------
 
-include make-compiler-clang9
+include make-compiler-gnu8
 
 #C_COMPILER = g++
 #EXE_LINK = g++

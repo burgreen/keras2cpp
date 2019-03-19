@@ -1,0 +1,103 @@
+# make-compiler-clang9
+
+#----------------------------
+# global section
+#----------------------------
+
+OBJ = o
+
+#----------------------------
+# c compiler 
+#----------------------------
+
+C_COMPILER = gcc
+C_LINK     = gcc
+
+C_FLAGS  = 
+C_FLAGS += -DCOMPILER_GNU_C
+C_FLAGS += -DCOMPILER_GNU_F
+C_FLAGS += -DCOMPILER_F_UNDERSCORE
+
+C_PATH = -I.
+
+C_OUT = -o
+
+C_DEPEND = makedepend
+
+#----------------------------
+# cpp compiler 
+#----------------------------
+
+CPP_COMPILER  = g++
+CPP_LINK      = g++
+
+CPP_FLAGS  = $(C_FLAGS)
+CPP_FLAGS += -std=c++17
+
+CPP_PATH = -I.
+
+CPP_OUT = -o
+
+CPP_DEPEND = makedepend
+
+#----------------------------
+# f90 compiler 
+#----------------------------
+
+F90_COMPILER = gfortran
+F90_LINK     = gfortran
+
+F90_FLAGS  = -O3
+F90_FLAGS += -cpp
+#F90_FLAGS += -fpp
+#F90_FLAGS += -real-size 64
+#F90_FLAGS += -Dreal_t=REAL\(kind\(0.d0\)\)
+#F90_FLAGS += -Dcomplex_t=COMPLEX\(kind\(0.d0\)\)
+#F90_FLAGS += -O3
+#F90_FLAGS += -fdefault-real-8
+#F90_FLAGS += -fdefault-double-8
+F90_FLAGS += -DCOMPILER_GNU_F
+F90_FLAGS += -DCOMPILER_GNU_C
+
+F90_PATH  = 
+#F90_PATH += -I../include
+#F90_PATH += -I../src/common 
+
+F90_OUT   = -o
+
+F90_DEPEND = make-depend-perl --depend=mod --silent --longpath 
+
+#----------------------------
+# compiler options
+#----------------------------
+
+EXE_EXT   = 
+EXE_FLAGS = 
+
+STATIC_LIB_PRE   = lib
+STATIC_LIB_EXT   = a
+STATIC_LIB_FLAGS = 
+
+SHARED_LIB_PRE   = 
+SHARED_LIB_EXT   = so
+SHARED_LIB_FLAGS = -fPIC
+
+#----------------------------
+# link options
+#----------------------------
+
+EXE_LINK       = undefined
+EXE_LINK_FLAGS = -lstdc++
+
+STATIC_LIB_LINK       = ar rc
+STATIC_LIB_LINK_FLAGS = 
+
+SHARED_LIB_LINK       = undefined
+SHARED_LIB_LINK_FLAGS = -shared
+
+#----------------------------
+# lib options
+#----------------------------
+
+LIBS      = 
+LIBS_PATH =  
