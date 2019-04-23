@@ -101,6 +101,38 @@ extern "C" {
 
   int
 //------------------------------------------
+  keras2cpp_model_evaluate_data_v5( int model, int n_in,  float* in,
+                                               int n_out, float* out )
+//------------------------------------------
+{
+  Tensor t_in; t_in.resize( n_in );
+  {
+    float mean[] = { 3.60555178, -0.24038211, -2.52406594 };
+    float scale[] = {1.64775645, 1.24384599, 1.06873837 }; 
+
+    for( int i=0; i < n_in; i++ )
+    {
+      if( in[i] < 1.e-20 ) in[i] = 1.e-20;
+      in[i] = std::log10( in[i] );
+      in[i] = (in[i] - mean[i]) / scale[i];
+      t_in(i) = in[i];
+    }
+  }
+
+  Tensor t_out = (*p_model)(t_in);
+
+  if( t_out.size() != n_out ) { printf("bad n_out\n"); exit(1); }
+
+  for( int i=0; i < n_out; i++ )
+  {
+    out[i] = std::pow( 10., t_out(i) );
+  }
+
+  return 0;
+}
+
+  int
+//------------------------------------------
   keras2cpp_model_delete( int model )
 //------------------------------------------
 {

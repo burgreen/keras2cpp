@@ -16,5 +16,5 @@ DIR_BASE = .
 
 LIB_KERAS2CPP = $(DIR_BASE)
 
-LIBS += $(LIB_KERAS2CPP)/libkeras2cpp.a 
+LIBS += $(LIB_KERAS2CPP)/libkeras2cpp_cpp.a 
 

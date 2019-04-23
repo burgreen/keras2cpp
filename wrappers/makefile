@@ -4,7 +4,7 @@
 # include what to build
 #----------------------------
 
-include make-2-f90-exe
+include make-3-cpp-exe
 
 #--------------------------- 
 # rules section

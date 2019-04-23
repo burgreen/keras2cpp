@@ -30,30 +30,36 @@ def s_read_data_csv( filename ):
   fp = open( filename,'r' )
 
   line = 1
-  line = fp.readline()
+  line = fp.readline() # header
   data = {}
   tol = 1.e-05
-  re = 0
+  idx = -1
+  re0 = 1000.0
   while line:
     line = fp.readline().rstrip('\r\n')
-    s = str.split( line,',' )
     if not line: break
-    if s[0] != re:
-      re = s[0]
-      data[re] = {}
-      data[re]['dudy'] = []
-      data[re]['tke'] = []
-      data[re]['u'] = []
-      data[re]['v'] = []
-      data[re]['w'] = []
-      data[re]['c'] = []
+    s = str.split( line,',' )
+    re1 = float(s[0])
+    if re1 < re0:
+      #print( re1, re0 )
+      idx += 1
+      data[idx] = {}
+      data[idx]['rey'] = []
+      data[idx]['dudy'] = []
+      data[idx]['tke'] = []
+      data[idx]['u'] = []
+      data[idx]['v'] = []
+      data[idx]['w'] = []
+      data[idx]['c'] = []
 
-    data[re]['dudy'].append( float(s[2]) )
-    data[re]['tke'].append( float(s[3]) )
-    data[re]['u'].append( float(s[4]) )
-    data[re]['v'].append( float(s[5]) )
-    data[re]['w'].append( float(s[6]) )
-    data[re]['c'].append( float(s[7]) )
+    re0 = float(s[0])
+    data[idx]['rey'].append( float(s[0]) )
+    data[idx]['dudy'].append( float(s[2]) )
+    data[idx]['tke'].append( float(s[3]) )
+    data[idx]['u'].append( float(s[4]) )
+    data[idx]['v'].append( float(s[5]) )
+    data[idx]['w'].append( float(s[6]) )
+    data[idx]['c'].append( float(s[7]) )
     #print(data.keys())
     #print(data[re].keys())
     #print(data[re]['u'])
@@ -67,13 +73,16 @@ def main( file, which_re, predicted ):
 
   data = s_read_data_csv( file )
   keys = list(data.keys())
+  print( keys )
   k = keys[which_re]
   print( k )
 
   if predicted != 'undefined':
     pred = s_read_data_csv( predicted )
     keys = list(pred.keys())
+    print( keys )
     p = keys[which_re]
+    print( p )
   
   fig = figure()
   ax = subplot(111)
@@ -95,7 +104,7 @@ def main( file, which_re, predicted ):
   
   xlabel('Velocity Gradient du/dy')
   ylabel('Turbulent Stresses')
-  title('Re_mean = 13,900')
+  title('Dataset = ' + str(k))
   grid(True)
   
   #savefig('plot.png')
@@ -106,7 +115,7 @@ def main( file, which_re, predicted ):
 #----------------------------------------------------
 if __name__ == '__main__':
 #----------------------------------------------------
-  if len(sys.argv) == 1: print('usage: python plot.py data.csv [1]=which_re [undefined]=predicted')
+  if len(sys.argv) == 1: print('usage: python plot.py data.csv [which_re]=1 [predicted]=undefined')
   if len(sys.argv) == 1: exit()
 
   file = 'undefined'
