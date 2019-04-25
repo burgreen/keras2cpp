@@ -7,6 +7,7 @@
   #define c_keras2cpp_model_evaluate  c_keras2cpp_model_evaluate_
   #define c_keras2cpp_model_evaluate_data_v4  c_keras2cpp_model_evaluate_data_v4_
   #define c_keras2cpp_model_evaluate_data_v5  c_keras2cpp_model_evaluate_data_v5_
+  #define c_keras2cpp_model_evaluate_data_v6  c_keras2cpp_model_evaluate_data_v6_
 #endif
 
 #if defined COMPILER_F_CAPITALS
@@ -16,6 +17,7 @@
   #define c_keras2cpp_model_evaluate   C_KERAS2CPP_MODEL_EVALUATE
   #define c_keras2cpp_model_evaluate_data_v4  C_KERAS2CPP_MODEL_EVALUATE_DATA_V4_
   #define c_keras2cpp_model_evaluate_data_v5  C_KERAS2CPP_MODEL_EVALUATE_DATA_V5_
+  #define c_keras2cpp_model_evaluate_data_v6  C_KERAS2CPP_MODEL_EVALUATE_DATA_V6_
 #endif
 
   void
@@ -87,5 +89,21 @@
   int*    rc
 )
 {
-  *rc = keras2cpp_model_evaluate_data_v4( *model, *n_in, in, *n_out, out );
+  *rc = keras2cpp_model_evaluate_data_v5( *model, *n_in, in, *n_out, out );
+}
+
+  void
+//------------------------------------------
+  c_keras2cpp_model_evaluate_data_v6
+//------------------------------------------
+( 
+  int*    model, 
+  int*    n_in, 
+  float*  in, 
+  int*    n_out, 
+  float*  out, 
+  int*    rc
+)
+{
+  *rc = keras2cpp_model_evaluate_data_v6( *model, *n_in, in, *n_out, out );
 }
